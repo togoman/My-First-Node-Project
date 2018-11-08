@@ -13,17 +13,21 @@ app.get('/', function(req, res){
 app.post('/home', function(req, res){
     var userId = req.body.userId;
     var password = req.body.password;
-    var validationResult = findAuthentication(userId, password);
-    console.log("validationResult : "+validationResult);
+    findAuthentication(userId, password, res, loginAfterAuth);
+    
+});
+
+function loginAfterAuth(validationResult, res){
+    console.log("loginAfterAuth start");
     if(validationResult != null){
         res.render('pages/home', {userName : validationResult.name});
     }else{
         res.render('pages/login', {errMsg : 'Login Credential is wrong !!!'});
     }
-    
-});
+}
 
-function findAuthentication(userId, password){
+function findAuthentication(userId, password, res, callback){
+    console.log("findAuthentication start");
     var MongoClient = require('mongodb').MongoClient;
     var url = "mongodb://localhost:27017/DbForMyFirstNodeApp";
     var name;
@@ -42,7 +46,8 @@ function findAuthentication(userId, password){
                     console.log(result);
                     console.log(result != null);
                     db.close();
-                    return result;
+                    console.log("findAuthentication end");
+                    callback(result, res);
                 }
             });
         }
