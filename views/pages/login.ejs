@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+    <form action="./home" method="POST">
+        <main>
+            <div class="jumbotron" align="center">
+                <p>Welcome to My First Node App</p>
+                <% if(typeof(errMsg) !== "undefined"){ %>
+                    <p><font color="red"><b><%= errMsg%></b></font></p>
+                <%}%>
+                <table>
+                    <tr>
+                        <td align="right">
+                            Enter User Id :&nbsp;&nbsp;
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="userId" placeholder="User Id"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Enter Password :&nbsp;&nbsp;
+                        </td>
+                        <td>
+                            <input type="password" class="form-control" name="password" placeholder="Password"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <table align="center">
+                                <tr>
+                                    <td><input type="submit" value="Submit"/></td>
+                                </tr>
+                        </table>
+                    </tr>
+                </table>
+            </div>
+        </main>
+    </form>
+
+<footer style="padding-bottom: 0px;">
+    <% include ../partials/footer %>
+</footer>
+
+</body>
+</html>
